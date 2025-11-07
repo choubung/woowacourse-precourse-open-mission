@@ -1,18 +1,21 @@
 package com.precourse.openMission.domain.memo;
 
+import com.precourse.openMission.domain.BaseTimeEntity;
 import com.precourse.openMission.domain.user.User;
 import jakarta.persistence.*;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 
+@Getter
 @NoArgsConstructor
 @Entity
 @Table(name = "memo")
-public class Memo {
+public class Memo extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "memo_id")
@@ -29,18 +32,20 @@ public class Memo {
     @Column(length = 200, nullable = false)
     private String content;
 
-    @CreatedDate
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @LastModifiedDate
-    @Column(name = "updated_at", nullable = false)
-    private LocalDateTime updatedAt;
+    @Column(name = "memo_date", nullable = false)
+    private LocalDateTime memoDate;
 
     @Builder
-    public Memo(User user, String scope, String content) {
+    public Memo(User user, String scope, String content, LocalDateTime memoDate) {
         this.user = user;
         this.scope = MemoScope.valueOf(scope);
         this.content = content;
+        this.memoDate = memoDate;
+    }
+
+    public void update(String scope, String content, LocalDateTime memoDate) {
+        this.scope = MemoScope.valueOf(scope);
+        this.content = content;
+        this.memoDate = memoDate;
     }
 }
