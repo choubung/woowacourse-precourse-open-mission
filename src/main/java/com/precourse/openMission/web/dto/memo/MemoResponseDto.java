@@ -3,9 +3,11 @@ package com.precourse.openMission.web.dto.memo;
 import com.precourse.openMission.domain.memo.Memo;
 import com.precourse.openMission.domain.memo.MemoScope;
 import com.precourse.openMission.domain.user.User;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+@Getter
 public class MemoResponseDto {
     private Long memoId;
     private User user;
