@@ -9,13 +9,13 @@ import java.time.LocalDateTime;
 @Getter
 public class MemoListResponseDto {
     private Long memoId;
-    private User user;
+    private Long userId;
     private String content;
     private LocalDateTime memoDate;
 
     public MemoListResponseDto(Memo memo) {
         this.memoId = memo.getId();
-        this.user = memo.getUser();
+        this.userId = memo.getUser().getId();
         this.content = memo.getContent();
         this.memoDate = memo.getMemoDate();
     }
