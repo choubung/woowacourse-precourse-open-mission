@@ -10,14 +10,14 @@ import java.time.LocalDateTime;
 @Getter
 public class MemoResponseDto {
     private Long memoId;
-    private User user;
+    private Long userId;
     private MemoScope scope;
     private String content;
     private LocalDateTime memoDate;
 
     public MemoResponseDto(Memo memo) {
         this.memoId = memo.getId();
-        this.user = memo.getUser();
+        this.userId = memo.getUser().getId();
         this.scope = memo.getScope();
         this.content = memo.getContent();
         this.memoDate = memo.getMemoDate();
