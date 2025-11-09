@@ -4,7 +4,9 @@ import com.precourse.openMission.service.MemoService;
 import com.precourse.openMission.web.dto.memo.MemoListResponseDto;
 import com.precourse.openMission.web.dto.memo.MemoResponseDto;
 import com.precourse.openMission.web.dto.memo.MemoSaveRequestDto;
+import com.precourse.openMission.web.dto.memo.MemoUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,7 +17,6 @@ import java.util.List;
 public class MemoController {
     private final MemoService memoService; // 의존성 주입
 
-    // TODO: @PostMapping
     @PostMapping
     public Long saveMemo(@RequestBody MemoSaveRequestDto requestDto) {
         return memoService.saveMemo(requestDto);
@@ -28,11 +29,19 @@ public class MemoController {
     }
 
     // 특정 게시글 조회
-    @GetMapping("/{memo_id}")
-    public MemoResponseDto getMemo(@PathVariable Long memo_id) {
-        return memoService.findById(memo_id);
+    @GetMapping("/{memoId}")
+    public MemoResponseDto getMemo(@PathVariable Long memoId) {
+        return memoService.findById(memoId);
     }
 
-    // TODO: @PutMapping
-    // TODO: @DeleteMapping
+    @PutMapping("/{memoId}")
+    public Long updateMemo(@PathVariable Long memoId, @RequestBody MemoUpdateRequestDto requestDto) {
+        return memoService.updateMemo(memoId, requestDto);
+    }
+
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{memoId}")
+    public void deleteMemo(@PathVariable Long memoId) {
+        memoService.deleteMemo(memoId);
+    }
 }
