@@ -7,6 +7,7 @@ import com.precourse.openMission.domain.user.UserRepository;
 import com.precourse.openMission.web.dto.memo.MemoListResponseDto;
 import com.precourse.openMission.web.dto.memo.MemoResponseDto;
 import com.precourse.openMission.web.dto.memo.MemoSaveRequestDto;
+import com.precourse.openMission.web.dto.memo.MemoUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,8 +28,6 @@ public class MemoService {
         return memoRepository.save(memo).getId();
     }
 
-    // TODO: 업데이트
-
     // 특정 게시글 조회
     public MemoResponseDto findById(Long id) {
         Memo memo = memoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다."));
@@ -43,7 +42,20 @@ public class MemoService {
                 .collect(Collectors.toList());
     }
 
-    // TODO: 삭제
+    @Transactional
+    public Long updateMemo(Long id, MemoUpdateRequestDto requestDto) {
+        Memo memo = memoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다."));
+
+        memo.update(String.valueOf(requestDto.getScope()), requestDto.getContent(), requestDto.getMemoDate());
+
+        return id;
+    }
+
+    @Transactional
+    public void deleteMemo(Long id) {
+        Memo memo = memoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다."));
+        memoRepository.delete(memo);
+    }
 
     private Memo createMemo(MemoSaveRequestDto requestDto) {
         Optional<User> user = userRepository.findById(requestDto.getUserId());

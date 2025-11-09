@@ -1,4 +1,4 @@
-package com.precourse.openMission.domain;
+package com.precourse.openMission.unit.domain;
 
 import com.precourse.openMission.domain.memo.Memo;
 import com.precourse.openMission.domain.memo.MemoScope;
