@@ -9,6 +9,7 @@ import com.precourse.openMission.service.MemoService;
 import com.precourse.openMission.web.dto.memo.MemoListResponseDto;
 import com.precourse.openMission.web.dto.memo.MemoResponseDto;
 import com.precourse.openMission.web.dto.memo.MemoSaveRequestDto;
+import com.precourse.openMission.web.dto.memo.MemoUpdateRequestDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -116,8 +117,40 @@ public class MemoServiceTest {
         assertThat(memoListResponseDtos.get(1).getContent()).isEqualTo("공개글 2");
     }
 
-    // TODO: 수정 테스트
+    @DisplayName("메모 아이디와 MemoUpdateRequestDto(공개범위, 내용, 날짜)를 받아 메모를 업데이트한다.")
+    @Test
+    void 메모_업데이트_테스트() {
+        // given
+        Long memoId = 1L;
+        String expectedContent = "업데이트 후";
 
+        Memo mockMemo = createMemo(MemoScope.PUBLIC, "업데이트 전");
+        ReflectionTestUtils.setField(mockMemo, "id", memoId);
+        MemoUpdateRequestDto memoUpdateRequestDto = new MemoUpdateRequestDto(expectedContent, MemoScope.PUBLIC, dateTime);
+        doReturn(Optional.of(mockMemo)).when(memoRepository).findById(memoId);
+
+        // when
+        final Long updatedMemoId = memoService.updateMemo(memoId, memoUpdateRequestDto);
+
+        // then
+        assertThat(updatedMemoId).isEqualTo(memoId);
+        assertThat(mockMemo.getContent()).isEqualTo(expectedContent);
+    }
+
+    @DisplayName("갱신하려는 메모 아이디가 존재하지 않으면 IllegalArgumentException이 발생한다.")
+    @Test
+    void 갱신하려는_메모가_존재하지_않으면_예외가_발생한다() {
+        // given
+        Long invalidId = 1L;
+        doReturn(Optional.empty()).when(memoRepository).findById(invalidId);
+
+        MemoUpdateRequestDto requestDto = new MemoUpdateRequestDto("테스트", MemoScope.PUBLIC, dateTime);
+
+        // when, then
+        assertThatThrownBy(() -> memoService.updateMemo(invalidId, requestDto))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("해당 게시글이 없습니다.");
+    }
 
     @DisplayName("메모 아이디를 받아 메모를 삭제한다.")
     @Test
