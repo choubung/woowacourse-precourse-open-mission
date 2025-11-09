@@ -22,7 +22,7 @@ public class MemoService {
 
     // 특정 게시글 조회
     public MemoResponseDto findById(Long id) {
-        Memo memo = memoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
+        Memo memo = memoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다."));
         return new MemoResponseDto(memo);
     }
 
