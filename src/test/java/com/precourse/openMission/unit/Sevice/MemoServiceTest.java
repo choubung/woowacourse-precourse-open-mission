@@ -184,7 +184,7 @@ public class MemoServiceTest {
     private Memo createMemo(MemoScope scope, String content) {
         return Memo.builder()
                 .user(new User())
-                .scope(String.valueOf(scope))
+                .scope(scope.name())
                 .content(content)
                 .memoDate(dateTime)
                 .build();
@@ -193,7 +193,7 @@ public class MemoServiceTest {
     private Memo createMemo(User user, MemoScope scope, String content) {
         return Memo.builder()
                 .user(user)
-                .scope(String.valueOf(scope))
+                .scope(scope.name())
                 .content(content)
                 .memoDate(dateTime)
                 .build();

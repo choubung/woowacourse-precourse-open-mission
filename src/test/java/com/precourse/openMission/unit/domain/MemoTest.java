@@ -22,7 +22,7 @@ public class MemoTest {
         memo = Memo.builder()
                 .user(user)
                 .content("test")
-                .scope(String.valueOf(MemoScope.SECRET))
+                .scope(MemoScope.SECRET.name())
                 .memoDate(LocalDateTime.of(2025, Month.NOVEMBER, 7, 15, 30))
                 .build();
     }
@@ -36,7 +36,7 @@ public class MemoTest {
         LocalDateTime updatedDate = LocalDateTime.of(2025, Month.NOVEMBER, 10, 15, 30);
 
         // when
-        memo.update(String.valueOf(updatedScope),updatedContent, updatedDate);
+        memo.update(updatedScope.name(),updatedContent, updatedDate);
 
         // then
         assertThat(memo.getContent()).isEqualTo(updatedContent);

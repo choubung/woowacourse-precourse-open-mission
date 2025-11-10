@@ -233,7 +233,7 @@ public class MemoControllerTest {
                 .user(new User())
                 .memoDate(dateTime)
                 .content(content)
-                .scope(String.valueOf(scope))
+                .scope(scope.name())
                 .build();
     }
 }

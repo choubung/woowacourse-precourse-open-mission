@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface MemoRepository extends JpaRepository<Memo, Long> {
-    @Query("SELECT m FROM Memo m where m.scope = '전체공개' ORDER BY m.memoDate desc")
+    @Query("SELECT m FROM Memo m JOIN FETCH m.user WHERE m.scope = 'PUBLIC' ORDER BY m.memoDate DESC")
     List<Memo> findAllPublicDesc();
 }

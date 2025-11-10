@@ -46,7 +46,7 @@ public class MemoService {
     public Long updateMemo(Long id, MemoUpdateRequestDto requestDto) {
         Memo memo = memoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다."));
 
-        memo.update(String.valueOf(requestDto.getScope()), requestDto.getContent(), requestDto.getMemoDate());
+        memo.update(requestDto.getScope().name(), requestDto.getContent(), requestDto.getMemoDate());
 
         return id;
     }
@@ -63,7 +63,7 @@ public class MemoService {
         return Memo.builder()
                 .user(user.orElse(null))
                 .content(requestDto.getContent())
-                .scope(String.valueOf(requestDto.getScope()))
+                .scope(requestDto.getScope().name())
                 .memoDate(requestDto.getMemoDate())
                 .build();
     }

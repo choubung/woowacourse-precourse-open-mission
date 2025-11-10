@@ -1,7 +1,6 @@
 package com.precourse.openMission.web.dto.memo;
 
 import com.precourse.openMission.domain.memo.Memo;
-import com.precourse.openMission.domain.user.User;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
