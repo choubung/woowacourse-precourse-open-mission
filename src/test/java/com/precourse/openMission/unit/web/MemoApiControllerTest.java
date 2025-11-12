@@ -14,7 +14,7 @@ import com.precourse.openMission.domain.user.Role;
 import com.precourse.openMission.domain.user.User;
 import com.precourse.openMission.exception.GlobalExceptionHandler;
 import com.precourse.openMission.service.MemoService;
-import com.precourse.openMission.web.MemoController;
+import com.precourse.openMission.web.MemoApiController;
 import com.precourse.openMission.web.dto.memo.MemoListResponseDto;
 import com.precourse.openMission.web.dto.memo.MemoResponseDto;
 import com.precourse.openMission.web.dto.memo.MemoSaveRequestDto;
@@ -44,7 +44,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(MockitoExtension.class)
-public class MemoControllerTest {
+public class MemoApiControllerTest {
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
     static final LocalDateTime dateTime = LocalDateTime.of(2025, 2, 10, 12, 30);
@@ -58,7 +58,7 @@ public class MemoControllerTest {
     private HttpSession mockSession;
 
     @InjectMocks
-    private MemoController memoController;
+    private MemoApiController memoApiController;
 
     private MockMvc mockMvc;
 
@@ -67,7 +67,7 @@ public class MemoControllerTest {
         LoginUserArgumentResolver loginUserArgumentResolver =
                 new LoginUserArgumentResolver(mockSession);
 
-        mockMvc = MockMvcBuilders.standaloneSetup(memoController)
+        mockMvc = MockMvcBuilders.standaloneSetup(memoApiController)
                 .setControllerAdvice(new GlobalExceptionHandler())
                 .setCustomArgumentResolvers(loginUserArgumentResolver)
                 .build();
