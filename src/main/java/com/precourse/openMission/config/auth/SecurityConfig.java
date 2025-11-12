@@ -28,9 +28,9 @@ public class SecurityConfig {
 
                         .requestMatchers(HttpMethod.GET, "/home/memos", "/home/memos/**").permitAll()
 
-                        .requestMatchers(HttpMethod.POST, "/home/memos").hasRole(Role.USER.name())
-                        .requestMatchers(HttpMethod.PUT, "/home/memos/**").hasRole(Role.USER.name())
-                        .requestMatchers(HttpMethod.DELETE, "/home/memos/**").hasRole(Role.USER.name())
+                        .requestMatchers(HttpMethod.POST, "/home/memos").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+                        .requestMatchers(HttpMethod.PUT, "/home/memos/**").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+                        .requestMatchers(HttpMethod.DELETE, "/home/memos/**").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
 
                         .requestMatchers("/home/users/**").hasRole(Role.USER.name())
                         .requestMatchers("/home/admin/**").hasRole(Role.ADMIN.name())
