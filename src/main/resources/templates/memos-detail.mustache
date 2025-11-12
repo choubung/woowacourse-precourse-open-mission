@@ -1,0 +1,54 @@
+{{>layout/header}}
+
+<div class="container my-4">
+    <div class="col-md-8 col-lg-6 mx-auto">
+        <h1>메모 상세 조회</h1>
+
+        <!-- 1. MemoResponseDto의 데이터를 폼에 표시 (수정 불가, readonly) -->
+        <form>
+            <!-- 2. [필수] 삭제/수정 JS가 사용할 ID (숨겨둠) -->
+            <input type="hidden" id="id" value="{{memo.memoId}}">
+
+            <div class="form-group mb-3">
+                <label for="content">내용</label>
+                <!-- DTO의 content 필드를 readonly textarea에 표시 -->
+                <textarea class="form-control" id="content" readonly rows="8">{{memo.content}}</textarea>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="userName">작성자</label>
+                <!-- DTO의 userName 필드를 readonly input에 표시 -->
+                <input type="text" class="form-control" id="userName" value="{{memo.userName}}" readonly>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="memoDate">날짜</label>
+                <!-- DTO의 memoDate 필드를 readonly input에 표시 -->
+                <input type="text" class="form-control" id="memoDate" value="{{memo.memoDate}}" readonly>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="scope">공개범위</label>
+                <input type="text" class="form-control" id="scope" value="{{memo.scope}}" readonly>
+            </div>
+        </form>
+
+        <!-- 3. 버튼 영역 -->
+        <div class="d-flex justify-content-between">
+            <!-- 목록 버튼 -->
+            <a href="/" role="button" class="btn btn-secondary">목록</a>
+
+            <div>
+                <!-- 4. 수정 버튼 (수정 '페이지'로 이동) -->
+                <a href="/home/memos/update/{{memo.memoId}}" role="button" class="btn btn-primary">수정</a>
+                <!-- 5. 삭제 버튼 (index.js의 delete() 함수가 호출됨) -->
+                <button type="button" class="btn btn-danger" id="btn-delete">삭제</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 6. [필수] 삭제 버튼(id="btn-delete")이 동작하려면 index.js가 필요 -->
+<script src="/js/app/index.js"></script>
+
+{{>layout/footer}}

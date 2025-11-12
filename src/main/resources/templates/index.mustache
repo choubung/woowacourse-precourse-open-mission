@@ -1,0 +1,31 @@
+{{>layout/header}}
+
+<h1>떠도는 마음들</h1>
+<div class="container my-4">
+    <div class="col-md-12">
+
+        <div class="d-flex justify-content-end mb-3">
+            <a href="/home/memos/save" role="button" class="btn btn-primary">메모 등록</a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-horizontal table-bordered">
+                <thead class="thead-strong">
+                <tr>
+                    <th>내용</th>
+                    <th>작성자</th>
+                    <th>작성일</th>
+                </tr>
+                </thead>
+                <tbody id="tbody">
+                {{#memos}}
+                    <tr>
+                        <td><a href="/home/memos/detail/{{memoId}}">{{content}}</a></td>
+                        <td>{{userName}}</td>
+                        <td>{{memoDate}}</td>
+                    </tr>
+                {{/memos}}
+                </tbody>
+            </table>
+        </div> </div>
+</div> {{>layout/footer}}

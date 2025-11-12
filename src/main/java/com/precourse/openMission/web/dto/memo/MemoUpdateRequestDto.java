@@ -14,8 +14,6 @@ import java.time.LocalDateTime;
 public class MemoUpdateRequestDto {
     private String content;
     private MemoScope scope;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime memoDate;
 
     @Builder

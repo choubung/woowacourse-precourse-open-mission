@@ -1,0 +1,45 @@
+{{>layout/header}}
+
+<div class="container my-4"> <!-- (여백 추가) -->
+    <h1>메모 등록</h1>
+    <div class="col-md-8 col-lg-6 mx-auto"> <!-- (폼 너비 조정) -->
+        <form>
+            <!-- 1. [삭제] '제목(title)' 폼 그룹 -->
+
+            <!-- 2. [삭제] '작성자(author)' 폼 그룹 (세션에서 자동 처리) -->
+
+            <!-- 3. [수정] '내용(content)' 폼 그룹 -->
+            <div class="form-group mb-3">
+                <label for="content"> 내용 </label>
+                <textarea class="form-control" id="content" placeholder="내용을 입력하세요" rows="5"></textarea>
+            </div>
+
+            <!-- 4. [추가] '공개 범위(scope)' 폼 그룹 (DTO에 필요) -->
+            <div class="form-group mb-3">
+                <label class="form-label">공개 범위</label>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="scope" id="scopePublic" value="PUBLIC" checked>
+                        <label class="form-check-label" for="scopePublic">전체 공개</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="scope" id="scopeSecret" value="SECRET">
+                        <label class="form-check-label" for="scopeSecret">나만 보기</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. [추가] '날짜(memoDate)' 폼 그룹 (DTO에 필요) -->
+            <div class="form-group mb-3">
+                <label for="memoDate">날짜</label>
+                <input type="datetime-local" class="form-control" id="memoDate">
+            </div>
+        </form>
+        <div class="d-flex justify-content-end"> <!-- (버튼 정렬) -->
+            <a href="/" role="button" class="btn btn-secondary mr-2">취소</a>
+            <button type="button" class="btn btn-primary" id="btn-save">등록</button>
+        </div>
+    </div>
+</div>
+
+{{>layout/footer}}

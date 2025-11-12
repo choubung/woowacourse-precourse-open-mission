@@ -1,0 +1,51 @@
+{{>layout/header}}
+
+<div class="container my-4"> <!-- (여백 추가) -->
+    <h1>메모 수정</h1>
+    <div class="col-md-8 col-lg-6 mx-auto"> <!-- (폼 너비 조정) -->
+        <form>
+            <!-- 1. [유지] id는 JS가 사용하므로 숨겨둡니다. (readonly -> hidden) -->
+            <input type="hidden" id="id" value="{{memo.memoId}}">
+
+            <!-- 2. [삭제] '제목(title)' 폼 그룹 -->
+
+            <!-- 3. [삭제] '작성자(author)' 폼 그룹 -->
+
+            <!-- 4. [수정] '내용(content)' 폼 그룹 (DTO에 필요) -->
+            <div class="form-group mb-3">
+                <label for="content"> 내용 </label>
+                <textarea class="form-control" id="content">{{memo.content}}</textarea>
+            </div>
+
+            <!-- 5. [추가] '공개 범위(scope)' 폼 그룹 (DTO에 필요) -->
+            <div class="form-group mb-3">
+                <label class="form-label">공개 범위</label>
+                <div>
+                    <!-- (Mustache if 조건문을 사용해 저장된 값으로 checked) -->
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="scope" id="scopePublic" value="PUBLIC" {{#isPublic}}checked{{/isPublic}}>
+                        <label class="form-check-label" for="scopePublic">전체 공개</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="scope" id="scopeSecret" value="SECRET" {{#isSecret}}checked{{/isSecret}}>
+                        <label class="form-check-label" for="scopeSecret">나만 보기</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. [추가] '날짜(memoDate)' 폼 그룹 (DTO에 필요) -->
+            <div class="form-group mb-3">
+                <label for="memoDate">날짜</label>
+                <!-- (datetime-local은 value 형식이 'YYYY-MM-DDTHH:mm' 이어야 함) -->
+                <input type="datetime-local" class="form-control" id="memoDate" value="{{memoDateFormatted}}">
+            </div>
+        </form>
+        <div class="d-flex justify-content-end"> <!-- (버튼 정렬) -->
+            <a href="/" role="button" class="btn btn-secondary mr-2">취소</a>
+            <button type="button" class="btn btn-primary" id="btn-update">수정</button>
+            <button type="button" class="btn btn-danger ml-2" id="btn-delete">삭제</button>
+        </div>
+    </div>
+</div>
+
+{{>layout/footer}}

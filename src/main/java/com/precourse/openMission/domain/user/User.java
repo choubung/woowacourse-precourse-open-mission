@@ -42,7 +42,7 @@ public class User {
         return this;
     }
 
-    public String getRole() {
-        return this.role.getRole();
+    public String getRoleKey() {
+        return this.role.getKey();
     }
 }
