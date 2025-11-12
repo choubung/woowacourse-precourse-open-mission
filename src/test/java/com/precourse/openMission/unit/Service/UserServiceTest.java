@@ -54,6 +54,6 @@ public class UserServiceTest {
     void 비로그인_사용자_탈퇴_시도시_예외가_발생한다() {
         // when, then
         assertThatThrownBy(() -> userService.deleteUser(null))
-                .isInstanceOf(NullPointerException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
